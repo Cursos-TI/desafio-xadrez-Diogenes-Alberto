@@ -49,6 +49,26 @@
         }while (movimento<passosRainha);
         FinalizarMovimento("Rainha");
     }
+    void MovimentarCavalo(char direcao[tamanho],char direcao2[tamanho])
+    {
+        int movimento=0;
+        char peca [tamanho];
+
+        strcpy(peca,"Cavalo");
+        IniciarMovimento(peca);
+        for (int i = 1; i <= 1; i++)
+        {
+            do
+            {
+                printf("%s",direcao);
+                movimento++;
+            }while (movimento<=1);
+            printf("%s",direcao2);
+        }
+        FinalizarMovimento(peca);
+        
+    }
+
 int main() {
     // Nível Novato - Movimentação das Peças
     // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
@@ -76,6 +96,7 @@ int main() {
     // Nível Aventureiro - Movimentação do Cavalo
     // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
     // Um loop pode representar a movimentação horizontal e outro vertical.
+    MovimentarCavalo(Baixo,Esquerda);
 
     // Nível Mestre - Funções Recursivas e Loops Aninhados
     // Sugestão: Substitua as movimentações das peças por funções recursivas.
