@@ -16,39 +16,33 @@
     {
         printf("Finalizando o movimento da peça %s\n",peca);
     }
-    void MovimentarBispo(char cima[tamanho],char esquerda[tamanho])
+    void MovimentarBispo(char cima[tamanho],char esquerda[tamanho],int movimento)
     {
-        int movimento=0;
-        IniciarMovimento("Bispo");
-        while (movimento<passosBispo)
+        if(movimento>0)
         {
             printf("%s",cima);
             printf("%s",esquerda);
-            movimento++;
+            MovimentarBispo(cima,esquerda,movimento-1);
         }
-        FinalizarMovimento("Bispo");
     }
 
-    void MovimentarTorre(char direcao[tamanho])
+    void MovimentarTorre(char direcao[tamanho],int movimento)
     {
-        IniciarMovimento("Torre");
-        for(int i=0;i<passosTorre;i++)
+        if(movimento>0)
         {
             printf("%s",direcao);
+            MovimentarTorre(direcao,movimento-1);
         }
-        FinalizarMovimento("Torre");
     }
-    void MovimentarRainha(char direcao[tamanho])
+    void MovimentarRainha(char direcao[tamanho],int movimento)
     {
-        int movimento=0;
-        IniciarMovimento("Rainha");
-        do
+        if (movimento>0)
         {
             printf("%s",direcao);
-            movimento++;
-        }while (movimento<passosRainha);
-        FinalizarMovimento("Rainha");
+            MovimentarRainha(direcao,movimento-1);
+        }
     }
+
     void MovimentarCavalo(char direcao[tamanho],char direcao2[tamanho])
     {
         int movimento=0;
@@ -56,14 +50,16 @@
 
         strcpy(peca,"Cavalo");
         IniciarMovimento(peca);
-        for (int i = 1; i <= 1; i++)
+        for (int i = 2,j=2; i >=0 &&j>=0; i--,j--)
         {
-            do
+            if(i)
             {
                 printf("%s",direcao);
-                movimento++;
-            }while (movimento<=1);
-            printf("%s",direcao2);
+            }
+            if(!j)
+            {
+                printf("%s",direcao2);
+            }
         }
         FinalizarMovimento(peca);
         
@@ -72,31 +68,44 @@
 int main() {
     // Nível Novato - Movimentação das Peças
     // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
-    char cima[tamanho];
+    char Cima[tamanho];
     char Baixo[tamanho];
     char Direita[tamanho];
     char Esquerda[tamanho];
+    char Rainha[tamanho] ;
+    char Bispo[tamanho] ;
+    char Torre[tamanho] ;
+    char Cavalo[tamanho];
 
-    strcpy(cima,"Cima\n");
+    strcpy(Cima,"Cima\n");
     strcpy(Baixo,"Baixo\n");
     strcpy(Direita,"Direita\n");
     strcpy(Esquerda,"Esquerda\n");
-
-    
+    strcpy(Rainha,"Rainha\n");
+    strcpy(Bispo,"Bispo\n");
+    strcpy(Torre,"Torre\n");
+    strcpy(Cavalo,"Cavalo\n");
+   
     // Implementação de Movimentação do Bispo
     // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
-    MovimentarBispo(cima,Esquerda);
+    IniciarMovimento(Bispo);
+    MovimentarBispo(Direita,Cima,passosBispo);
+    FinalizarMovimento(Bispo);
     // Implementação de Movimentação da Torre
     // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
-    MovimentarTorre(Direita);
+    IniciarMovimento(Torre);
+    MovimentarTorre(Direita,passosTorre);
+    FinalizarMovimento(Torre);
 
     // Implementação de Movimentação da Rainha
     // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
-    MovimentarRainha(Esquerda);
+    IniciarMovimento(Rainha);
+    MovimentarRainha(Esquerda,passosRainha);
+    FinalizarMovimento(Rainha);
     // Nível Aventureiro - Movimentação do Cavalo
     // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
     // Um loop pode representar a movimentação horizontal e outro vertical.
-    MovimentarCavalo(Baixo,Esquerda);
+    MovimentarCavalo(Cima,Direita);
 
     // Nível Mestre - Funções Recursivas e Loops Aninhados
     // Sugestão: Substitua as movimentações das peças por funções recursivas.
